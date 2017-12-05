@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        function reqListener() {
+            console.log(this.responseText);
+            let price = JSON.parse(this.responseText).market.ltc_usd;
+            console.log('the price right now is ' + JSON.parse(this.responseText).market.ltc_usd);
+            document.getElementById('ltc_usd').value = price;
+        }
+
+        var oReq = new XMLHttpRequest();
+        oReq.addEventListener("load", reqListener);
+        oReq.open("GET", "http://litecoinpool.com/api");
+        oReq.setRequestHeader('Access-Control-Allow-Origin','*');
+        oReq.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+        oReq.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+        oReq.send();
+
+    </script>
+</head>
+<body>
+
+<div id="foo"></div>
+<div id="ltc_usd"></div>
+</body>
+</html>
